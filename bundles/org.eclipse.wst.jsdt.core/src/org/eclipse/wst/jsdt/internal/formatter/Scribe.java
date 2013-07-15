@@ -635,7 +635,11 @@ public class Scribe {
 	}
 
 	public void indent() {
-		this.indentationLevel += this.indentationSize;
+		indent(this.indentationSize);
+	}
+	
+	public void indent(int size) {
+		this.indentationLevel += size;
 		this.numberOfIndentations++;
 	}
 
@@ -1793,8 +1797,13 @@ public class Scribe {
 		return stringBuffer.toString();
 	}
 
-	public void unIndent() {
-		this.indentationLevel -= this.indentationSize;
+	public void unIndent(int indentationSize) {
+		this.indentationLevel -= indentationSize;
 		this.numberOfIndentations--;
 	}
+	
+	public void unIndent() {
+		unIndent(this.indentationSize);
+	}
+	
 }

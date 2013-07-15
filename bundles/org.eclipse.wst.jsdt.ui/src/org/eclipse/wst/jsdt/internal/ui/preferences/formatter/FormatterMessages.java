@@ -424,6 +424,7 @@ final class FormatterMessages extends NLS {
 	public static String NewLinesTabPage_newlines_group_option_empty_method_body;
 	public static String NewLinesTabPage_newlines_group_option_empty_block;
 	public static String NewLinesTabPage_newlines_group_option_empty_end_of_file;
+	public static String NewLinesTabPage_newlines_group_option_after_comma_in_multiple_localvars;
 	public static String NewLinesTabPage_empty_statement_group_title;
 	public static String NewLinesTabPage_emtpy_statement_group_option_empty_statement_on_new_line;
 	public static String NewLinesTabPage_arrayInitializer_group_title;

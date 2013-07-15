@@ -994,6 +994,20 @@ public class DefaultCodeFormatterConstants {
 	 */
 	public static final String FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_OBJLIT_INITIALIZER = JavaScriptCore.PLUGIN_ID + ".formatter.insert_new_line_after_opening_brace_in_objlit_initializer";//$NON-NLS-1$
 
+	
+	/**
+	 * <pre>
+	 * FORMATTER / Option to insert a new line after the comma in multiple local declaration
+	 *     - option id:         "org.eclipse.wst.jsdt.core.formatter.insert_new_line_after_comma_in_multiple_local_declarations"
+	 *     - possible values:   { INSERT, DO_NOT_INSERT }
+	 *     - default:           INSERT
+	 * </pre>
+	 * @see JavaScriptCore#INSERT
+	 * @see JavaScriptCore#DO_NOT_INSERT
+	 *  
+	 */
+	public static final String FORMATTER_INSERT_NEW_LINE_AFTER_COMMA_IN_MULTIPLE_LOCAL_DECLARATIONS = JavaScriptCore.PLUGIN_ID + ".formatter.insert_new_line_after_comma_in_multiple_local_declarations"; //$NON-NLS-1$
+	
 	/**
 	 * <pre>
 	 * FORMATTER / Option to insert a new line after each comma in an object literal initializer

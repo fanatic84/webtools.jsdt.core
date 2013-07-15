@@ -141,6 +141,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 
 	public final static boolean DEBUG = false;
 	private static final int NO_MODIFIERS = 0;
+	private static final int DEFAULT_LOCALVARIABLE_ALIGNEMENT_INDENT = 4;
 	/*
 	 * Set of expected tokens type for a single type reference.
 	 * This array needs to be SORTED.
@@ -1315,9 +1316,13 @@ public class CodeFormatterVisitor extends ASTVisitor {
         }
     }
 
-	private void formatLocalDeclaration(LocalDeclaration localDeclaration, BlockScope scope, boolean insertSpaceBeforeComma, boolean insertSpaceAfterComma) {
+	private void formatLocalDeclaration(LocalDeclaration localDeclaration, BlockScope scope, boolean insertSpaceBeforeComma,
+			boolean insertSpaceAfterComma, boolean insertNewLineAfterComma) {
 
-		if (!isMultipleLocalDeclaration(localDeclaration)) {
+		boolean firstLocalDeclaration = !isMultipleLocalDeclaration(localDeclaration);
+		
+		if (firstLocalDeclaration) {
+			
 			if (localDeclaration.modifiers != NO_MODIFIERS) {
 		        this.scribe.printComment();
 				this.scribe.printModifiers(this);
@@ -1377,12 +1382,22 @@ public class CodeFormatterVisitor extends ASTVisitor {
 			this.scribe.exitAlignment(assignmentAlignment, true);
 		}
 
-		if (isPartOfMultipleLocalDeclaration()) {
+		if (isPartOfMultipleLocalDeclaration()) { // has other declaration
 			this.scribe.printNextToken(TerminalTokens.TokenNameCOMMA, insertSpaceBeforeComma);
 			if (insertSpaceAfterComma) {
 				this.scribe.space();
 			}
 			this.scribe.printTrailingComment();
+			if (insertNewLineAfterComma) {
+				this.scribe.printNewLine();				
+				if (firstLocalDeclaration) { // if first declation
+					this.scribe.indent(DEFAULT_LOCALVARIABLE_ALIGNEMENT_INDENT);
+				}
+			}
+		} else { // last declation
+			if (insertNewLineAfterComma && !firstLocalDeclaration) { // if last == first, don't unIndent 
+				this.scribe.unIndent(DEFAULT_LOCALVARIABLE_ALIGNEMENT_INDENT);
+			}
 		}
 	}
 
@@ -3336,7 +3351,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 		if (this.preferences.insert_space_after_opening_paren_in_for) {
 			this.scribe.space();
 		}
-		formatLocalDeclaration(forStatement.elementVariable, scope, false, false);
+		formatLocalDeclaration(forStatement.elementVariable, scope, false, false, false);
 
 		this.scribe.printNextToken(TerminalTokens.TokenNameCOLON, this.preferences.insert_space_before_colon_in_for);
 		if (this.preferences.insert_space_after_colon_in_for) {
@@ -3441,7 +3456,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 			int length = initializations.length;
 			for (int i = 0; i < length; i++) {
 				if (initializations[i] instanceof LocalDeclaration) {
-					formatLocalDeclaration((LocalDeclaration) initializations[i], scope, this.preferences.insert_space_before_comma_in_for_inits, this.preferences.insert_space_after_comma_in_for_inits);
+					formatLocalDeclaration((LocalDeclaration) initializations[i], scope, this.preferences.insert_space_before_comma_in_for_inits, this.preferences.insert_space_after_comma_in_for_inits, false);
 				} else {
 					initializations[i].traverse(this, scope);
 					if (i >= 0 && (i < length - 1)) {
@@ -3729,7 +3744,7 @@ public class CodeFormatterVisitor extends ASTVisitor {
 	 * @see org.eclipse.wst.jsdt.internal.compiler.ASTVisitor#visit(org.eclipse.wst.jsdt.internal.compiler.ast.LocalDeclaration, org.eclipse.wst.jsdt.internal.compiler.lookup.BlockScope)
 	 */
 	public boolean visit(LocalDeclaration localDeclaration, BlockScope scope) {
-		formatLocalDeclaration(localDeclaration, scope, this.preferences.insert_space_before_comma_in_multiple_local_declarations, this.preferences.insert_space_after_comma_in_multiple_local_declarations);
+		formatLocalDeclaration(localDeclaration, scope, this.preferences.insert_space_before_comma_in_multiple_local_declarations, this.preferences.insert_space_after_comma_in_multiple_local_declarations, this.preferences.insert_new_line_after_comma_in_multiple_local_declarations); 
 		return false;
 	}
 	/**

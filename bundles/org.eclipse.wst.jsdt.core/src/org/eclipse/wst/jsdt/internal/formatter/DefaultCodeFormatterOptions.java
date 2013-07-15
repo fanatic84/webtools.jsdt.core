@@ -128,6 +128,7 @@ public class DefaultCodeFormatterOptions {
 	public boolean insert_new_line_after_annotation;
 	public boolean insert_new_line_after_opening_brace_in_array_initializer;
 	public boolean insert_new_line_after_opening_brace_in_objlit_initializer;
+	public boolean insert_new_line_after_comma_in_multiple_local_declarations;
 	public boolean insert_new_line_after_comma_in_objlit_initializer;
 	public boolean insert_new_line_at_end_of_file_if_missing;
 	public boolean insert_new_line_before_catch_in_try_statement;
@@ -407,6 +408,7 @@ public class DefaultCodeFormatterOptions {
 		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_ANNOTATION, this.insert_new_line_after_annotation ? JavaScriptCore.INSERT : JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_ARRAY_INITIALIZER, this.insert_new_line_after_opening_brace_in_array_initializer? JavaScriptCore.INSERT : JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_OBJLIT_INITIALIZER, this.insert_new_line_after_opening_brace_in_objlit_initializer? JavaScriptCore.INSERT : JavaScriptCore.DO_NOT_INSERT);
+		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_COMMA_IN_MULTIPLE_LOCAL_DECLARATIONS, this.insert_new_line_after_comma_in_multiple_local_declarations? JavaScriptCore.INSERT : JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_COMMA_IN_OBJLIT_INITIALIZER, this.insert_new_line_after_comma_in_objlit_initializer? JavaScriptCore.INSERT : JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, this.insert_new_line_at_end_of_file_if_missing ? JavaScriptCore.INSERT : JavaScriptCore.DO_NOT_INSERT);
 		options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_BEFORE_CATCH_IN_TRY_STATEMENT, this.insert_new_line_before_catch_in_try_statement? JavaScriptCore.INSERT : JavaScriptCore.DO_NOT_INSERT);
@@ -1166,6 +1168,10 @@ public class DefaultCodeFormatterOptions {
 		final Object insertNewLineAfterOpeningBraceInObjLitInitializerOption = settings.get(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_OBJLIT_INITIALIZER);
 		if (insertNewLineAfterOpeningBraceInObjLitInitializerOption != null) {
 			this.insert_new_line_after_opening_brace_in_objlit_initializer = JavaScriptCore.INSERT.equals(insertNewLineAfterOpeningBraceInObjLitInitializerOption);
+		}
+		final Object insertNewLineAfterCommaInMultipleLocalDeclarationsOption = settings.get(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_COMMA_IN_MULTIPLE_LOCAL_DECLARATIONS);
+		if (insertNewLineAfterCommaInMultipleLocalDeclarationsOption != null) {
+			this.insert_new_line_after_comma_in_multiple_local_declarations = JavaScriptCore.INSERT.equals(insertNewLineAfterCommaInMultipleLocalDeclarationsOption);
 		}
 		final Object insertNewLineAfterCommaInObjLitInitializerOption = settings.get(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_COMMA_IN_OBJLIT_INITIALIZER);
 		if (insertNewLineAfterCommaInObjLitInitializerOption != null) {
@@ -2023,6 +2029,7 @@ public class DefaultCodeFormatterOptions {
 		this.insert_new_line_after_annotation = true;
 		this.insert_new_line_after_opening_brace_in_array_initializer = false;
 		this.insert_new_line_after_opening_brace_in_objlit_initializer = true;
+		this.insert_new_line_after_comma_in_multiple_local_declarations = false;
 		this.insert_new_line_after_comma_in_objlit_initializer = true;
 		this.insert_new_line_at_end_of_file_if_missing = false;
 		this.insert_new_line_before_catch_in_try_statement = false;
@@ -2289,6 +2296,7 @@ public class DefaultCodeFormatterOptions {
 		this.insert_new_line_after_annotation = true;
 		this.insert_new_line_after_opening_brace_in_array_initializer = false;
 		this.insert_new_line_after_opening_brace_in_objlit_initializer = true;
+		this.insert_new_line_after_comma_in_multiple_local_declarations = false;
 		this.insert_new_line_after_comma_in_objlit_initializer = true;
 		this.insert_new_line_at_end_of_file_if_missing = false;
 		this.insert_new_line_before_catch_in_try_statement = false;

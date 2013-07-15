@@ -46,6 +46,7 @@ public class NewLinesTabPage extends FormatterTabPage {
 	"function foo(data) {\n" + //$NON-NLS-1$
 	"\n" + //$NON-NLS-1$
 	"    var abc = 1;\n" + //$NON-NLS-1$
+	"    var def, g = '4', h = 55\n;" + //$NON-NLS-1$
 	"    var xyz = 'one';\n" + //$NON-NLS-1$
 	"    var arr1 = ['123',function() {return 5},'abc'];\n" + //$NON-NLS-1$
 	"    var obj1 = { make: 'Ford', model: 'Thunderbird', year: 1967 };\n" + //$NON-NLS-1$
@@ -92,6 +93,7 @@ public class NewLinesTabPage extends FormatterTabPage {
 //		createPref(newlinesGroup, numColumns, FormatterMessages.NewLinesTabPage_newlines_group_option_empty_enum_constant, DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_IN_EMPTY_ENUM_CONSTANT, DO_NOT_INSERT_INSERT);
 //		createPref(newlinesGroup, numColumns, FormatterMessages.NewLinesTabPage_newlines_group_option_empty_annotation_decl_body, DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_IN_EMPTY_ANNOTATION_DECLARATION, DO_NOT_INSERT_INSERT); 
 		createPref(newlinesGroup, numColumns, FormatterMessages.NewLinesTabPage_newlines_group_option_empty_end_of_file, DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AT_END_OF_FILE_IF_MISSING, DO_NOT_INSERT_INSERT); 
+		createPref(newlinesGroup, numColumns, FormatterMessages.NewLinesTabPage_newlines_group_option_after_comma_in_multiple_localvars, DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_COMMA_IN_MULTIPLE_LOCAL_DECLARATIONS, DO_NOT_INSERT_INSERT);
 		
 		final Group objectInitializerGroup= createGroup(numColumns, composite, FormatterMessages.NewLinesTabPage_objectInitializer_group_title); 
 		createPref(objectInitializerGroup, numColumns, FormatterMessages.NewLinesTabPage_object_group_option_after_opening_brace_of_object_initializer, DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_OPENING_BRACE_IN_OBJLIT_INITIALIZER, DO_NOT_INSERT_INSERT); 
